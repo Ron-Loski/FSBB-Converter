@@ -15,4 +15,4 @@
 
 在 MATLAB / Simulink 中打开 `Simulink/FSBB_Converter.slx`。本次归档仅收录 Simulink 模型文件，未包含原目录中的仿真结果、缓存和辅助 MATLAB 脚本。
 
-本仓库为 2026-10-20 的文件快照；本次上传未重新编译固件或运行仿真。
+STM32 工程和历史备份为 2026-10-20 的文件快照；当前模型 `Simulink/FSBB_Converter.slx` 已同步至 2026-10-21 的最新保存版本。本次同步未重新编译固件或运行仿真。

@@ -1,6 +1,6 @@
 #include "PID.h"
 
-void PID_Init(PID_t *p)
+void PID_Init(PIDtypedef *p)
 {
 	p->Target = 0;
 	p->Actual = 0;
@@ -33,4 +33,3 @@ void PID_Update(PIDtypedef *p)
 	if (p->Out > p->OutMax) {p->Out = p->OutMax;}
 	if (p->Out < p->OutMin) {p->Out = p->OutMin;}
 }
-

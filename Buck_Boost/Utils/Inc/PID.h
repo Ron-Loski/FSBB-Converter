@@ -1,8 +1,6 @@
 #ifndef __PID_H_
 #define __PID_H_
 
-#include "Global_Inc.h"
-
 typedef struct{
 	float Target;
 	float Actual;

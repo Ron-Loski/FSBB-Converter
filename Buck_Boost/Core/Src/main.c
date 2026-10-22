@@ -101,6 +101,7 @@ int main(void)
   MX_ADC2_Init();
   MX_DAC1_Init();
   /* USER CODE BEGIN 2 */
+  APP_OpenLoop_Init();
 
   /* USER CODE END 2 */
 
@@ -108,6 +109,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    APP_OpenLoop_Step();
+    HAL_Delay(1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

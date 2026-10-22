@@ -1,6 +1,6 @@
-#ifndef __CALLBACK_H_
-#define __CALLBACK_H_
+#include "Callback.h"
 
-#include "Global_Inc.h"
+void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
 
-#endif
+}

@@ -18,6 +18,9 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
+#include "comp.h"
+#include "dac.h"
 #include "hrtim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -90,6 +93,13 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_HRTIM1_Init();
+  MX_COMP4_Init();
+  MX_COMP6_Init();
+  MX_DAC3_Init();
+  MX_DAC4_Init();
+  MX_ADC1_Init();
+  MX_ADC2_Init();
+  MX_DAC1_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */

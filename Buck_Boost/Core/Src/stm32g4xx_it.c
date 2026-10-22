@@ -55,6 +55,8 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern ADC_HandleTypeDef hadc1;
+extern ADC_HandleTypeDef hadc2;
 extern HRTIM_HandleTypeDef hhrtim1;
 /* USER CODE BEGIN EV */
 
@@ -199,6 +201,21 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles ADC1 and ADC2 global interrupt.
+  */
+void ADC1_2_IRQHandler(void)
+{
+  /* USER CODE BEGIN ADC1_2_IRQn 0 */
+
+  /* USER CODE END ADC1_2_IRQn 0 */
+  HAL_ADC_IRQHandler(&hadc1);
+  HAL_ADC_IRQHandler(&hadc2);
+  /* USER CODE BEGIN ADC1_2_IRQn 1 */
+
+  /* USER CODE END ADC1_2_IRQn 1 */
+}
+
+/**
   * @brief This function handles HRTIM timer E global interrupt.
   */
 void HRTIM1_TIME_IRQHandler(void)
@@ -210,6 +227,20 @@ void HRTIM1_TIME_IRQHandler(void)
   /* USER CODE BEGIN HRTIM1_TIME_IRQn 1 */
 
   /* USER CODE END HRTIM1_TIME_IRQn 1 */
+}
+
+/**
+  * @brief This function handles HRTIM fault global interrupt.
+  */
+void HRTIM1_FLT_IRQHandler(void)
+{
+  /* USER CODE BEGIN HRTIM1_FLT_IRQn 0 */
+
+  /* USER CODE END HRTIM1_FLT_IRQn 0 */
+  HAL_HRTIM_IRQHandler(&hhrtim1,HRTIM_TIMERINDEX_COMMON);
+  /* USER CODE BEGIN HRTIM1_FLT_IRQn 1 */
+
+  /* USER CODE END HRTIM1_FLT_IRQn 1 */
 }
 
 /**

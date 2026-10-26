@@ -97,20 +97,32 @@ int main(void)
   MX_COMP6_Init();
   MX_DAC3_Init();
   MX_DAC4_Init();
-  MX_ADC1_Init();
   MX_ADC2_Init();
   MX_DAC1_Init();
   /* USER CODE BEGIN 2 */
-  APP_OpenLoop_Init();
-
+  APP_SysInit();
+  APP_DualLoopInit(&currLoop, &volLoop);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  /* 以下为ADC调试函数 */
+//  if (HAL_ADC_Calibration_Start() != HAL_OK){
+//	  Error_Handler();
+//  }
+//
+//  if (HAL_ADCEx_InjectedStart_IT(&hadc2) != HAL_OK){
+//      Error_Handler();
+//  }
+//
+//  /* 当前只启动产生 ADC 触发的主计数器 */
+//  if (HAL_HRTIM_WaveformCountStart(&hhrtim1, HRTIM_TIMERID_MASTER) != HAL_OK){
+//      Error_Handler();
+//  }
+
   while (1)
   {
-    APP_OpenLoop_Step();
-    HAL_Delay(1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

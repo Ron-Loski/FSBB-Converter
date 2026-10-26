@@ -1,4 +1,4 @@
-#include "PID.h"
+#include "Global_Inc.h"
 
 void PID_Init(PIDtypedef *p)
 {
@@ -33,3 +33,52 @@ void PID_Update(PIDtypedef *p)
 	if (p->Out > p->OutMax) {p->Out = p->OutMax;}
 	if (p->Out < p->OutMin) {p->Out = p->OutMin;}
 }
+
+float Clampfloat(float x, float min, float max)
+{
+	if (x > max) {return max;}
+	if (x < min) {return min;}
+
+	return x;
+}
+
+void PI_Update(PIDtypedef *p)
+{
+	p->Error1 = p->Error0;
+	p->Error0 = p->Target - p->Actual;
+
+	p->Integral = Clampfloat(p->Integral, p->IntegralMin, p->IntegralMax);
+
+	float raw = p->Kp * p->Error0 + p->Integral;
+
+	 /*
+	 * 未饱和：允许积分。
+	 * 已饱和：只允许帮助退出饱和的方向积分。
+	 */
+	if ((raw > p->OutMin && raw < p->OutMax) ||
+		(raw >= p->OutMax && p->Error0 < 0.0f) ||
+		(raw <= p->OutMin && p->Error0 > 0.0f))
+	{
+		p->Integral += p->Ki * p->Error0;
+	}
+
+	p->Integral = Clampfloat(p->Integral,
+							 p->IntegralMin,
+							 p->IntegralMax);
+
+	raw = p->Kp * p->Error0 + p->Integral;
+	p->Out = Clampfloat(raw, p->OutMin, p->OutMax);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

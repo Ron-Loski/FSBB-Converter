@@ -1,14 +1,23 @@
 #ifndef __APP_H_
 #define __APP_H_
 
-#include "Global_Types.h"
+#include "Global_Inc.h"
 
-uint8_t APP_CalibADC(Sample_Offsettypedef *p);
+void APP_SysInit(void);
+void APP_DualLoopInit(PIDtypedef *pI, PIDtypedef *pV);
+void APP_FaultTrip(uint32_t reason);
+void APP_CtrlSampleInst(float Dutyon);
+uint8_t APP_ModeJudge(void);
 void APP_Sample(void);
+void APP_SoftStart(PIDtypedef *p);
+float APP_SoftStartStep(float vBase);
+void APP_PWMDisable(void);
+void APP_PowerModeUpdate(float vin, float vout);
+void APP_WriteBridgeDuty(uint8_t time, float duty);
+void APP_PWMUpdate(float u);
 
-void APP_OpenLoop_Init(void);
-void APP_OpenLoop_Step(void);
-void APP_OpenLoop_SetModeDuty(Mode_Statetypdef mode, float da, float db);
-void APP_OpenLoop_SetModRatio(float m);
+
+
+
 
 #endif

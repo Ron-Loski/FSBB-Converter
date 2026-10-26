@@ -1,4 +1,4 @@
-#include "Global_Varibles.h"
+#include "Global_Inc.h"
 
 PIDtypedef currLoop = {
 		.Kp = 0.0f,
@@ -24,24 +24,39 @@ PIDtypedef volLoop = {
 		.OutMin = 0.0f,
 };
 
-/* 默认进入 Buck 开环模式，可在调试时修改为 MODE_BB 或 MODE_Boost */
-Mode_Statetypdef stateMode = MODE_Buck;
+volatile Sys_Stateypdef stateMode = SYS_IDLE;
+volatile Power_Modetypedef powerMode = MODE_BUCK;
+volatile Power_Modetypedef previousPowerMode = MODE_BUCK;
+volatile Reg_Modetypedef regMode =MODE_CV;
 
-Sample_Offsettypedef Offset = {0};
+Sample_Offsettypedef Offset = {0.0f};
 
-Sys_Paratyedef ParaRaw = {0};
-Sys_Paratyedef ParaReal = {0};
+Paratyedef sysPara = {0.0f};
+Paratyedef rawPara = {0.0f};
+Paratyedef adcPara = {0.0f};
 
-/* 开环控制默认参数 */
-OpenLoop_Paramtypedef OpenLoop = {
-		.enable        = 1U,     /* 1: 开启发波, 0: 关闭发波 */
-		.use_mod_ratio = 0U,     /* 0: 按 stateMode + da_set/db_set 直接给定; 1: 按调制比 m_set 自动分配三模态 */
-		.m_set         = 0.50f,  /* 目标调制比 M = da/db */
-		.m_low         = 0.80f,  /* Buck 与 BB 过渡模式边界 */
-		.m_high        = 1.25f,  /* BB 过渡与 Boost 模式边界 */
-		.da_set        = 0.50f,  /* A 侧上管 Q1 占空比设定 (0.0 ~ 1.0) */
-		.db_set        = 0.80f,  /* B 侧上管 Q3 占空比设定 (0.0 ~ 1.0，Boost 模式下下管 Q4 占空比 = 1 - db_set) */
-		.da_out        = 0.0f,   /* 实际当前输出 Q1 占空比（缓变后） */
-		.db_out        = 1.0f,   /* 实际当前输出 Q3 占空比（缓变后） */
-		.slew_step     = 0.005f, /* 每次更新允许的最大占空比变化步长（软起动/防突变） */
-};
+uint8_t pwmHistoryValid = 0U;
+
+float previousDutyE = 0.0f;   // 上一拍输入侧上管占空比
+float previousDutyF = 0.94f;  // 上一拍输出侧上管占空比
+
+/* 故障记录统一使用 Protection.c 中的 faultFlags。 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,117 @@
+{
+  "recovery_source": "CubeIDE local history; latest retained version for each known deleted file",
+  "files": [
+    {
+      "file": "Utils/Inc/Callback.h",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\8f\\40f68c338ed70011189f801e0086371a",
+      "original_modified_local": "2026-11-02T16:12:55.436000",
+      "sha256": "f399d61055ec2dd366e4d31cde38408f27687b283ee821a79be7d3c519fa0a48",
+      "size": 108
+    },
+    {
+      "file": "Utils/Inc/Extra.h",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\f1\\501d8d338ed70011189f801e0086371a",
+      "original_modified_local": "2026-11-02T20:03:53.774000",
+      "sha256": "4b5bdc42017b7ea1aa40c599746f9d2fc36d9270367ebeb08d830ecea829d029",
+      "size": 454
+    },
+    {
+      "file": "Utils/Inc/Global_Inc.h",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\bc\\706b8d338ed70011189f801e0086371a",
+      "original_modified_local": "2026-11-02T16:08:10.190000",
+      "sha256": "bfd725e525d54a69ccb36fc98fa3038fbd0449b3558c9bb167f5dbffa2d4f0b5",
+      "size": 465
+    },
+    {
+      "file": "Utils/Inc/Global_Types.h",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\7a\\80928d338ed70011189f801e0086371a",
+      "original_modified_local": "2026-10-26T13:35:55.364000",
+      "sha256": "db0cd4282200bcc8ad78c70bb2b6262bee053ad2d11932209e9731b947688d6c",
+      "size": 841
+    },
+    {
+      "file": "Utils/Inc/Global_Var.h",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\48\\81928d338ed70011189f801e0086371a",
+      "original_modified_local": "2026-11-03T21:50:06.113000",
+      "sha256": "443c7e1ac9dba0e5a3925f3eaf13b9bc74e2dd2127eb75e5f8f79b466693b4d9",
+      "size": 5142
+    },
+    {
+      "file": "Utils/Inc/Justfloat.h",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\36\\90b98d338ed70011189f801e0086371a",
+      "original_modified_local": "2026-07-25T15:23:23.049000",
+      "sha256": "60b136f31e183f3ff3794025df6787aba4ad6e71efc103fefd3d86cbd37d2232",
+      "size": 968
+    },
+    {
+      "file": "Utils/Inc/PID.h",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\8\\a0e08d338ed70011189f801e0086371a",
+      "original_modified_local": "2026-10-24T22:21:33.617000",
+      "sha256": "3203138a01da6227667d6b2b28647d94ae20cd51407cdefdf7319a52ef865658",
+      "size": 302
+    },
+    {
+      "file": "Utils/Inc/Protection_Config.h",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\58\\b0078e338ed70011189f801e0086371a",
+      "original_modified_local": "2026-11-02T21:57:56.024000",
+      "sha256": "47ede7fc21c0502feb7af8cb7ee3f3e07d2f8d08c3f23cdcd2030faa0029db79",
+      "size": 3494
+    },
+    {
+      "file": "Utils/Inc/Sample.h",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\59\\c02e8e338ed70011189f801e0086371a",
+      "original_modified_local": "2026-11-02T16:07:00.749000",
+      "sha256": "cfc4cb1d3d6a0d72f9ebdd1bb14257edf3f94eb57f775b3e381dbcc6a5e9c304",
+      "size": 139
+    },
+    {
+      "file": "Utils/Src/Callback.c",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\ee\\d0558e338ed70011189f801e0086371a",
+      "original_modified_local": "2026-11-02T21:15:01.084000",
+      "sha256": "3f6fa0063337dc7ede3d44d6869a550876b224f1c1a8fa1d9536d4c111ff3218",
+      "size": 697
+    },
+    {
+      "file": "Utils/Src/Extra.c",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\f5\\f0a38e338ed70011189f801e0086371a",
+      "original_modified_local": "2026-11-03T11:03:56.854000",
+      "sha256": "7d64759f8a777a90290b0413a8e8c838eeb881f015ad6b185cf8159ecf50aae4",
+      "size": 5725
+    },
+    {
+      "file": "Utils/Src/Global_Var.c",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\c4\\00cb8e338ed70011189f801e0086371a",
+      "original_modified_local": "2026-11-02T19:55:42.178000",
+      "sha256": "60273e7a691b16e13fe045cfb463add5bb586744b014429ed4396d945d667319",
+      "size": 891
+    },
+    {
+      "file": "Utils/Src/Justfloat.c",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\f8\\105a7b8390d60011189f801e0086371a",
+      "original_modified_local": "2026-10-24T22:21:33.656000",
+      "sha256": "189c34dd358d12c9438491ad5aef7537f5cfe6a6553bdf4de32d34da8a9c213c",
+      "size": 5277
+    },
+    {
+      "file": "Utils/Src/PID.c",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\f8\\20817b8390d60011189f801e0086371a",
+      "original_modified_local": "2026-10-24T22:21:33.654000",
+      "sha256": "c7725f6b9e1f734f7a28de1c41bf1afcbe35d3a64e48fe4c6d91e2153df0dafb",
+      "size": 1558
+    },
+    {
+      "file": "Utils/Src/Sample.c",
+      "history_source": "D:\\STM32CubeIDE_WorkSpace\\G4\\.metadata\\.plugins\\org.eclipse.core.resources\\.history\\a3\\20198f338ed70011189f801e0086371a",
+      "original_modified_local": "2026-11-03T21:51:30.329000",
+      "sha256": "79ff9ac1202487d759189d64e52532504be98356d6ec37f158c8c1d44e77130f",
+      "size": 1731
+    }
+  ],
+  "project_config_restore": {
+    "file": ".cproject",
+    "restored_entry": "Debug: Utils/Src",
+    "backup": "D:\\STM32CubeIDE_WorkSpace\\G4\\FSBB_Self\\codex\\cproject-before-Utils-source-restore-20261103.xml",
+    "sha256_before": "817e1a23992862551459ad20a946168d69fefb0afc73d6f1a06b2841cc808bd5",
+    "sha256_after": "d75c77a52dd8efb4a186ae493f4bfc2e3f685c76b2afe55be867748b496a92dd"
+  }
+}

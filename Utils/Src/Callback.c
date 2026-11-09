@@ -2,6 +2,7 @@
 
 void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
+	if (hadc != &hadc2) {return;}
 	ADC_Sample();
 
 	float vBase;
@@ -35,5 +36,6 @@ void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef *hadc)
 	Power_ModeUpdate(adcPara.InputVol, volLoop.Target);
 
 	Power_PWMUpdate(modulation);
+	(void)HRTIM_UpdateSamplePoint();
 
 }

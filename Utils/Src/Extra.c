@@ -77,6 +77,76 @@ void HRTIM_SetSampleCCR(float Duty)
 
 }
 
+volatile uint8_t adcSampleWindowValid = 0U;
+volatile uint32_t adcSamplePointTicks = 0U;
+
+uint8_t HRTIM_UpdateSamplePoint(void)
+{
+	/* All three timers must have equal periods, clocks and aligned counters.
+	 * Read the newly written preload values after Power_PWMUpdate().
+	 * Output 1 is set at update, reset at CMP1; complementary edges are
+	 * covered by EDGE_GUARD (validate against actual gate/analog settling).
+	 */
+	uint32_t period = __HAL_HRTIM_GETPERIOD(&hhrtim1, HRTIM_TIMERINDEX_MASTER);
+	uint32_t inputEdge = __HAL_HRTIM_GETCOMPARE(&hhrtim1, HRTIM_TIMERINDEX_TIMER_F, HRTIM_COMPAREUNIT_1);
+	uint32_t outputEdge = __HAL_HRTIM_GETCOMPARE(&hhrtim1, HRTIM_TIMERINDEX_TIMER_E, HRTIM_COMPAREUNIT_1);
+	uint32_t edges[4] = {0U, inputEdge, outputEdge, period};
+	uint32_t bestSpan = 0U;
+	uint32_t bestPoint = 0U;
+	uint8_t found = 0U;
+	adcSampleWindowValid = 0U;
+	adcSamplePointTicks = __HAL_HRTIM_GETCOMPARE(&hhrtim1, HRTIM_TIMERINDEX_MASTER, HRTIM_COMPAREUNIT_4);
+
+	if (period <= HRTIM_ADC_SCAN_TICKS + HRTIM_ADC_CONTROL_TICKS ||
+		inputEdge >= period || outputEdge >= period ||
+		__HAL_HRTIM_GETPERIOD(&hhrtim1, HRTIM_TIMERINDEX_TIMER_F) != period ||
+		__HAL_HRTIM_GETPERIOD(&hhrtim1, HRTIM_TIMERINDEX_TIMER_E) != period)
+	{
+		return 0U;
+	}
+
+	if (edges[1] > edges[2])
+	{
+		uint32_t temp = edges[1];
+		edges[1] = edges[2];
+		edges[2] = temp;
+	}
+
+	uint32_t latest = period - HRTIM_ADC_SCAN_TICKS - HRTIM_ADC_CONTROL_TICKS;
+	for (uint32_t i = 0U; i < 3U; i++)
+	{
+		uint32_t width = edges[i + 1U] - edges[i];
+		if (width < 2U * HRTIM_ADC_EDGE_GUARD_TICKS + HRTIM_ADC_SCAN_TICKS)
+		{
+			continue;
+		}
+		uint32_t first = edges[i] + HRTIM_ADC_EDGE_GUARD_TICKS;
+		uint32_t last = edges[i + 1U] - HRTIM_ADC_EDGE_GUARD_TICKS
+				- HRTIM_ADC_SCAN_TICKS;
+		if (last > latest) {last = latest;}
+		if (last < first) {continue;}
+		uint32_t span = last - first;
+		if (!found || span > bestSpan)
+		{
+			bestSpan = span;
+			bestPoint = first + span / 2U;
+			found = 1U;
+		}
+	}
+
+	if (found)
+	{
+		/* Master preload is enabled: apply at its next repetition update.
+		 * Do not force a mid-period update, which could retrigger the ADC.
+		 */
+		__HAL_HRTIM_SETCOMPARE(&hhrtim1, HRTIM_TIMERINDEX_MASTER,
+				HRTIM_COMPAREUNIT_4, bestPoint);
+		adcSamplePointTicks = bestPoint;
+		adcSampleWindowValid = 1U;
+	}
+	return found;
+}
+
 uint8_t Power_ModeJudge(void)
 {
 	uint8_t state;

@@ -18,7 +18,7 @@
 #define VIN_DSN		24.0f;		/* 输入侧电压 */
 #define VOUT_DSN	48.0f		/* 输出侧电压 */
 #define IIN_DSN		3.0f		/* 输入侧直流源电流限流 */
-#define IOUT_DSN	0.5f		/* 输出侧电流限流 */
+#define IOUT_DSN	2.0f		/* 输出侧电流限流 */
 
 /*********************三模式切换边界********************/
 #define V_CEOFFABV			0.15f  /* APP_ModeJudge 升压判定系数：(Vout - Vin) / Vin > 此值 */
@@ -32,15 +32,15 @@
 
 /*********************PID底层配置********************/
 #define VOLTAGE_TAR			0.0f  /* 电压环初始目标值，单位：V；启动后由软启动参考值更新 */
-#define VOLTAGE_KP			0.012f  /* 电压环比例增益 */
-#define VOLTAGE_KI			1.0f * Tpwm  /* 电压环每次控制更新的积分增益，已包含采样周期因素 */
+#define VOLTAGE_KP			0.00004f  /* 电压环比例增益 */
+#define VOLTAGE_KI			(1.0f * Tpwm)  /* 电压环每次控制更新的积分增益，已包含采样周期因素 */
 #define VOLTAGE_INTMAX		0.94f  /* 电压环积分项初始上限，控制量 u */
 #define VOLTAGE_INTMIN		0.0f  /* 电压环积分项初始下限，控制量 u */
 #define VOLTAGE_OUTMAX		0.94f  /* 电压环输出初始上限，运行时按功率模式更新 */
 #define VOLTAGE_OUTMIN		0.0f  /* 电压环输出初始下限，运行时按功率模式更新 */
 
 #define CURRENT_KP			3.0f  /* 电流限幅环比例增益，输出为电压参考修正量 */
-#define CURRENT_KI			100.0f * Tpwm  /* 电流限幅环每次控制更新的积分增益，已包含采样周期因素 */
+#define CURRENT_KI			(15.0f * Tpwm)  /* 电流限幅环每次控制更新的积分增益，已包含采样周期因素 */
 #define CURRENT_INTMAX		0.94f  /* 电流环积分项初始上限，单位：V；运行时设为 0 */
 #define CURRENT_INTMIN		0.f  /* 电流环积分项初始下限，单位：V；运行时设为 -vBase */
 #define CURRENT_OUTMAX		0.94f  /* 电流环输出初始上限，单位：V；运行时设为 0 */

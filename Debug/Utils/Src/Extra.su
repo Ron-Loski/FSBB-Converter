@@ -3,8 +3,9 @@
 ../Utils/Src/Extra.c:39:6:PWMDisable	4	static
 ../Utils/Src/Extra.c:58:6:HRTIM_TIMER_SetDutytoCCR	24	static
 ../Utils/Src/Extra.c:72:6:HRTIM_SetSampleCCR	24	static
-../Utils/Src/Extra.c:80:9:Power_ModeJudge	16	static
-../Utils/Src/Extra.c:99:6:SoftStart	24	static
-../Utils/Src/Extra.c:108:6:Power_ModeUpdate	24	static
-../Utils/Src/Extra.c:144:7:SoftStartStep	24	static
-../Utils/Src/Extra.c:185:6:Power_PWMUpdate	48	static
+../Utils/Src/Extra.c:83:9:HRTIM_UpdateSamplePoint	80	static
+../Utils/Src/Extra.c:150:9:Power_ModeJudge	16	static
+../Utils/Src/Extra.c:169:6:SoftStart	24	static
+../Utils/Src/Extra.c:178:6:Power_ModeUpdate	24	static
+../Utils/Src/Extra.c:214:7:SoftStartStep	24	static
+../Utils/Src/Extra.c:255:6:Power_PWMUpdate	48	static

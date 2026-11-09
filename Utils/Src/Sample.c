@@ -14,6 +14,7 @@ void ADC_Sample(void)
 
 	adcPara.OutCurr = -((rawPara.OutCurr - appADC_IOUT_ZERO_COUNTS) / 4095.0f * 3.3f / ADC_IOUT_A_PER_COUNT);
 }
+
 uint16_t i;
 HAL_StatusTypeDef state1;
 HAL_StatusTypeDef state2;

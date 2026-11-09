@@ -118,13 +118,16 @@ int main(void)
 
   HRTIM_TIMER_SetDutytoCCR(HRTIM_TIMERINDEX_TIMER_F, dutyF0);
   HRTIM_TIMER_SetDutytoCCR(HRTIM_TIMERINDEX_TIMER_E, dutyE0);
+
+//  HRTIM_TIMER_SetDutytoCCR(HRTIM_TIMERINDEX_TIMER_F, 0.94f);
+//  HRTIM_TIMER_SetDutytoCCR(HRTIM_TIMERINDEX_TIMER_E, 0.6267f);
   HAL_HRTIM_WaveformOutputStart(&hhrtim1, HRTIM_OUTPUT_TE1 | HRTIM_OUTPUT_TE2 |  HRTIM_OUTPUT_TF1 | HRTIM_OUTPUT_TF2);
   HAL_HRTIM_WaveformCountStart(&hhrtim1, HRTIM_TIMERID_MASTER | HRTIM_TIMERID_TIMER_E | HRTIM_TIMERID_TIMER_F);
 
 
    while (1)
   {
-	   VOFA_JustFloat_Send4(volLoop.Target, volLoop.Actual, currLoop.Target, currLoop.Actual);
+	   VOFA_JustFloat_Send4(adcPara.InputCurr, adcPara.InputVol, adcPara.OutCurr, adcPara.OutVol);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

@@ -1,4 +1,5 @@
 #include "Extra.h"
+#include <math.h>
 
 void SysInit(void)
 {
@@ -177,6 +178,7 @@ void SoftStart(PIDtypedef *p)
 
 void Power_ModeUpdate(float vin, float vout)
 {
+	if (!isfinite(vin) || !isfinite(vout) || vin <= 0.1f || vout < 0.0f) {return;}
 	float ratio = vout / vin;
 
 	switch (powerMode)
@@ -211,6 +213,16 @@ void Power_ModeUpdate(float vin, float vout)
 }
 
 /* 两个运行阶段共用：电流 PI 修正电压目标，电压 PI 计算调制量。 */
+static uint8_t ControlLimits(float *lo, float *hi)
+{
+    switch (powerMode) {
+    case MODE_BUCK: *lo = BUCK_D_MIN; *hi = BUCK_D_MAX; return 1U;
+    case MODE_BB: *lo = BB_D_MIN; *hi = BB_D_MAX; return 1U;
+    case MODE_BOOST: *lo = BOOST_D_MIN; *hi = BOOST_D_MAX; return 1U;
+    default: return 0U;
+    }
+}
+
 float SoftStartStep(float vBase)
 {
 	if (vBase < 0){
@@ -238,7 +250,34 @@ float SoftStartStep(float vBase)
 //	volLoop.Target = vBase;
 	volLoop.Actual = adcPara.OutVol;
 
-	PI_Update(&volLoop);
+    Power_ModeUpdate(adcPara.InputVol, vRef);
+    float lo, hi;
+    if (!ControlLimits(&lo, &hi)) {
+        stateMode = SYS_FAULT;
+        PWMDisable();
+        return 0.0f;
+    }
+    volLoop.OutMin = lo;
+    volLoop.OutMax = hi;
+    float proportional = volLoop.Kp * (vRef - volLoop.Actual);
+    /* Permit P cancellation at actuator limits, including mode transfers. */
+    volLoop.IntegralMin = lo - fabsf(proportional);
+    volLoop.IntegralMax = hi + fabsf(proportional);
+    if (powerMode != previousPowerMode) {
+        float mapped = lo;
+        if (previousDutyR > 0.0f && previousDutyC > 0.0f) {
+            float ratio = previousDutyR / previousDutyC;
+            mapped = (powerMode == MODE_BUCK) ? ratio * BUCK_HOLD_DUTY :
+                1.0f - ((powerMode == MODE_BB) ? BB_HOLD_DUTY : BOOST_HOLD_DUTY) / ratio;
+        }
+        /* Retain the mapped command in the PI state for subsequent ticks. */
+        volLoop.Out = Clampfloat(mapped, lo, hi);
+        volLoop.Integral = volLoop.Out - proportional;
+        volLoop.Error1 = volLoop.Error0;
+        volLoop.Error0 = vRef - volLoop.Actual;
+    } else {
+        PI_Update(&volLoop);
+    }
 
 	float reduction = vBase - vRef;
 
@@ -257,43 +296,11 @@ void Power_PWMUpdate(float Don)
 	float dMin;
 	float dMax;
 
-	switch (powerMode)
-	{
-		case MODE_BUCK:
-			dMin = BUCK_D_MIN;
-			dMax = BUCK_D_MAX;
-			break;
-
-		case MODE_BB:
-			dMin = BB_D_MIN;
-			dMax = BB_D_MAX;
-			break;
-
-		case MODE_BOOST:
-			dMin = BOOST_D_MIN;
-			dMax = BOOST_D_MAX;
-			break;
-
-		default:
-			break;
-	}
-
-	uint8_t modeChanged = (powerMode != previousPowerMode);
-
-	if (modeChanged)
-	{
-		float ratio = previousDutyR / previousDutyC;
-
-		if (powerMode == MODE_BUCK){
-			Don = ratio * BUCK_HOLD_DUTY;
-		}
-		else if (powerMode == MODE_BB){
-			Don = 1.0f - BB_HOLD_DUTY / ratio;
-		}
-		else{
-			Don = 1.0f - BOOST_HOLD_DUTY / ratio;
-		}
-	}
+    if (!isfinite(Don) || !ControlLimits(&dMin, &dMax)) {
+        stateMode = SYS_FAULT;
+        PWMDisable();
+        return;
+    }
 
 	float limitU = Clampfloat(Don, dMin, dMax);
 

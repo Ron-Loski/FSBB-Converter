@@ -33,7 +33,7 @@ void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef *hadc)
 
 	float modulation = SoftStartStep(vBase);
 
-	Power_ModeUpdate(adcPara.InputVol, volLoop.Target);
+	if (stateMode == SYS_FAULT) {return;}
 
 	Power_PWMUpdate(modulation);
 	(void)HRTIM_UpdateSamplePoint();

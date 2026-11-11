@@ -32,7 +32,7 @@
 
 /*********************PID底层配置********************/
 #define VOLTAGE_TAR			0.0f  /* 电压环初始目标值，单位：V；启动后由软启动参考值更新 */
-#define VOLTAGE_KP			0.00004f  /* 电压环比例增益 */
+#define VOLTAGE_KP			0.000004f  /* 电压环比例增益 */
 #define VOLTAGE_KI			(1.0f * Tpwm)  /* 电压环每次控制更新的积分增益，已包含采样周期因素 */
 #define VOLTAGE_INTMAX		0.94f  /* 电压环积分项初始上限，控制量 u */
 #define VOLTAGE_INTMIN		0.0f  /* 电压环积分项初始下限，控制量 u */
